@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour
     public Button cameraButton;
     public Image cameraButtonImage;
 
-    public GameObject writingPopUp;
-
     public const int PHASE_HUNT_OBJECTS = 1;
     public const int PHASE_FIND_SURFACE = 2;
     public const int PHASE_TRACE_LETTERS = 3;
@@ -43,6 +41,7 @@ public class GameManager : MonoBehaviour
         pointCloudManager = arSessionOrigin.GetComponent<ARPointCloudManager>();
 
         words = GetXRandomWordsFromBank(numOfWords);
+        StartHuntingPhase();
     }
 
     // Update is called once per frame
@@ -54,18 +53,13 @@ public class GameManager : MonoBehaviour
     public void TakePicture()
     {
         cameraEffects.Flash();
+        StartFindSurfacePhase();
         CollectCurrentWord();
     }
     public void CollectCurrentWord()
     {
         Word word = GetCurrentWord();
         word.Collect();
-    }
-    public void CreateWritingPopUp(Transform _transform)
-    {
-        GameObject popUp = Instantiate(writingPopUp, _transform.position, _transform.rotation);
-        popUp.transform.parent = _transform;
-        popUp.GetComponent<WritingPopUp>().word = GetCurrentWord().word;
     }
     public void StartHuntingPhase()
     {
@@ -82,7 +76,6 @@ public class GameManager : MonoBehaviour
         planeManager.enabled = true;
         pointCloudManager.enabled = true;
         arCursor.SetActive(true);
-        CreateWritingPopUp(arCursor.transform.GetChild(0).transform);
     }
 
     Word[] GetXRandomWordsFromBank(int x)
@@ -106,7 +99,7 @@ public class GameManager : MonoBehaviour
     {
         return wordBank.wordBank[Random.Range(0, wordBank.wordBank.Length)];
     }
-    Word GetCurrentWord()
+    public Word GetCurrentWord()
     {
         for (int i = 0; i < words.Length; i++)
         {

@@ -6,14 +6,17 @@ using UnityEngine.XR.ARFoundation;
 public class ARCursor : MonoBehaviour
 {
     public GameObject cursorChildObject;
+
     public GameObject objectToPlace;
     public ARRaycastManager raycastManager;
 
     public bool useCursor;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         cursorChildObject.SetActive(useCursor);
     }
 
