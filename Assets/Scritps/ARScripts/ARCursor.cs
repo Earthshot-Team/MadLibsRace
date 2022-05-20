@@ -23,6 +23,11 @@ public class ARCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(gameManager.currentPhase == 2)
+        {
+            objectToPlace = gameManager.GetCurrentWord().wordPrefab;
+        }
+
         if (useCursor)
         {
             UpdateCursor();
