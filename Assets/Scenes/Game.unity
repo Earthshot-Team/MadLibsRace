@@ -398,6 +398,10 @@ MonoBehaviour:
   mugIcon: {fileID: 21300000, guid: d4d344415ab8d0744b53fca2f442e92d, type: 3}
   windowIcon: {fileID: 21300000, guid: 79ceaf544c0549146b181880bfa36bb6, type: 3}
   scissorsIcon: {fileID: 21300000, guid: b149e5afb68f30845b1bbea317d08722, type: 3}
+  penObject: {fileID: 1550933686057169578, guid: de6935e5b5c7cca4ba472e0f3bf4b560, type: 3}
+  mugObject: {fileID: 6165393626646731052, guid: 3fe238b35c07af344be8d0a7cae058cd, type: 3}
+  windowObject: {fileID: 8228575790994040500, guid: 13421eb6490bf7c438c7bd98049f817f, type: 3}
+  scissorObject: {fileID: 3450919427034252967, guid: cb863d127e9bf0d45804241fd75309c4, type: 3}
   wordBank: []
 --- !u!4 &476752549
 Transform:
@@ -429,7 +433,6 @@ MonoBehaviour:
   words: []
   cameraButton: {fileID: 850619279}
   cameraButtonImage: {fileID: 973927607}
-  writingPopUp: {fileID: 2010761305071632127, guid: cbf3065f4e8b9cc47a9fb10772cf519f, type: 3}
   currentPhase: 0
   arSessionOrigin: {fileID: 82077071}
   arCursor: {fileID: 483356147}
@@ -463,8 +466,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorChildObject: {fileID: 785796584}
-  writingPopUp: {fileID: 2010761305071632127, guid: cbf3065f4e8b9cc47a9fb10772cf519f, type: 3}
-  writingObject: {fileID: 0}
   objectToPlace: {fileID: 5439666513067323982, guid: 5a36d9282cca19344a0e7391cf92f4fa, type: 3}
   raycastManager: {fileID: 82077073}
   useCursor: 1

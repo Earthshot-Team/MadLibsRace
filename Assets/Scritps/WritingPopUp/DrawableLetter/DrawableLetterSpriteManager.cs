@@ -12,7 +12,8 @@ public class DrawableLetterSpriteManager : MonoBehaviour
     {
         for (int i = 0; i < alphabet.Length; i++)
         {
-            if(alphabet[i] == letter)
+            char lowercase = char.ToLower(letter);
+            if(alphabet[i] == lowercase)
             {
                 return i;
             }

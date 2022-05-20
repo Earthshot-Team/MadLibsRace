@@ -5,14 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class Word
 {
-    public string word;
+    public string text;
     public Sprite icon;
     public bool collected;
 
-    public Word(string _word, Sprite _icon)
+    public GameObject wordPrefab;
+
+    public Word(string _word, Sprite _icon, GameObject _wordPrefab)
     {
-        word = _word;
+        text = _word;
         icon = _icon;
+        wordPrefab = _wordPrefab;
         collected = false;
     }
 
@@ -23,6 +26,6 @@ public class Word
 
     public string toString()
     {
-        return word + " " + collected;
+        return text + " " + collected;
     }
 }
