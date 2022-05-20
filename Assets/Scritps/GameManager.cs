@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,15 +16,32 @@ public class GameManager : MonoBehaviour
     public Button cameraButton;
     public Image cameraButtonImage;
 
+    public GameObject writingPopUp;
+
+    public const int PHASE_HUNT_OBJECTS = 1;
+    public const int PHASE_FIND_SURFACE = 2;
+    public const int PHASE_TRACE_LETTERS = 3;
+    public int currentPhase;
+
+    public GameObject arSessionOrigin;
+    public GameObject arCursor;
+
     // Private Components
     WordBank wordBank;
     CameraEffects cameraEffects;
+
+    ARPlaneManager planeManager;
+    ARPointCloudManager pointCloudManager;
 
     // Start is called before the first frame update
     void Start()
     {
         wordBank = FindObjectOfType<WordBank>();
         cameraEffects = FindObjectOfType<CameraEffects>();
+
+        planeManager = arSessionOrigin.GetComponent<ARPlaneManager>();
+        pointCloudManager = arSessionOrigin.GetComponent<ARPointCloudManager>();
+
         words = GetXRandomWordsFromBank(numOfWords);
     }
 
@@ -42,6 +60,29 @@ public class GameManager : MonoBehaviour
     {
         Word word = GetCurrentWord();
         word.Collect();
+    }
+    public void CreateWritingPopUp(Transform _transform)
+    {
+        GameObject popUp = Instantiate(writingPopUp, _transform.position, _transform.rotation);
+        popUp.transform.parent = _transform;
+        popUp.GetComponent<WritingPopUp>().word = GetCurrentWord().word;
+    }
+    public void StartHuntingPhase()
+    {
+        currentPhase = PHASE_HUNT_OBJECTS;
+
+        planeManager.enabled = false;
+        pointCloudManager.enabled = false;
+        arCursor.SetActive(false);
+    }
+    public void StartFindSurfacePhase()
+    {
+        currentPhase = PHASE_FIND_SURFACE;
+
+        planeManager.enabled = true;
+        pointCloudManager.enabled = true;
+        arCursor.SetActive(true);
+        CreateWritingPopUp(arCursor.transform.GetChild(0).transform);
     }
 
     Word[] GetXRandomWordsFromBank(int x)
