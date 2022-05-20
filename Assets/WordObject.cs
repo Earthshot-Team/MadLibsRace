@@ -5,12 +5,16 @@ using UnityEngine;
 public class WordObject : MonoBehaviour
 {
     Transform target;
+    public TraceableLetter[] letters;
 
     // Start is called before the first frame update
     void Start()
     {
         target = FindObjectOfType<Camera>().transform;
-        transform.LookAt(target, Vector3.forward);
+        letters = GetComponentsInChildren<TraceableLetter>();
+
+        transform.LookAt(target, Vector3.up);
+        transform.Rotate(-90f, 0, 180);
     }
 
     // Update is called once per frame
