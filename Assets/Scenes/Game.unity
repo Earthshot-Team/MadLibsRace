@@ -434,6 +434,7 @@ MonoBehaviour:
   cameraButton: {fileID: 850619279}
   cameraButtonImage: {fileID: 973927607}
   currentPhase: 0
+  huntingPhaseCanvas: {fileID: 1446967618}
   arSessionOrigin: {fileID: 82077071}
   arCursor: {fileID: 483356147}
 --- !u!1 &483356147

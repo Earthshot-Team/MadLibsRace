@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public const int PHASE_TRACE_LETTERS = 3;
     public int currentPhase;
 
+    public GameObject huntingPhaseCanvas;
     public GameObject arSessionOrigin;
     public GameObject arCursor;
 
@@ -54,7 +55,6 @@ public class GameManager : MonoBehaviour
     {
         cameraEffects.Flash();
         StartFindSurfacePhase();
-        CollectCurrentWord();
     }
     public void CollectCurrentWord()
     {
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     {
         currentPhase = PHASE_HUNT_OBJECTS;
 
+        huntingPhaseCanvas.SetActive(true);
         planeManager.enabled = false;
         pointCloudManager.enabled = false;
         arCursor.SetActive(false);
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         currentPhase = PHASE_FIND_SURFACE;
 
+        huntingPhaseCanvas.SetActive(false);
         planeManager.enabled = true;
         pointCloudManager.enabled = true;
         arCursor.SetActive(true);
