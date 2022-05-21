@@ -19,11 +19,13 @@ public class GameManager : MonoBehaviour
     public const int PHASE_HUNT_OBJECTS = 1;
     public const int PHASE_FIND_SURFACE = 2;
     public const int PHASE_TRACE_LETTERS = 3;
+    public const int PHASE_STORYTIME = 4;
     public int currentPhase;
 
     public GameObject huntingPhaseCanvas;
     public GameObject arSessionOrigin;
     public GameObject arCursor;
+    public GameObject storyObject;
 
     // Private Components
     WordBank wordBank;
@@ -49,6 +51,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         cameraButtonImage.sprite = GetCurrentWord().icon;
+
+        if (AllWordsCollected())
+        {
+            if (currentPhase != PHASE_STORYTIME)
+            {
+                StartStorytimePhase();
+            }
+        }
     }
 
     public void TakePicture()
@@ -79,6 +89,18 @@ public class GameManager : MonoBehaviour
         pointCloudManager.enabled = true;
         arCursor.SetActive(true);
     }
+    public void StartStorytimePhase()
+    {
+        currentPhase = PHASE_STORYTIME;
+
+        huntingPhaseCanvas.SetActive(false);
+        planeManager.enabled = false;
+        pointCloudManager.enabled = false;
+        arCursor.SetActive(false);
+
+        Instantiate(storyObject, transform.position, transform.rotation);
+    }
+
 
     Word[] GetXRandomWordsFromBank(int x)
     {
@@ -113,5 +135,18 @@ public class GameManager : MonoBehaviour
         // This should never happen
         Debug.LogError("All Words Have Been Collected But GetCurrentWord Was Still Called \nLINE 62, \nGAMEMANAGER.CS, \nGetCurrentWord Method, \n");
         return words[words.Length - 1];
+    }
+
+    bool AllWordsCollected()
+    {
+        for (int i = 0; i < words.Length; i++)
+        {
+            if (words[i].collected == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
