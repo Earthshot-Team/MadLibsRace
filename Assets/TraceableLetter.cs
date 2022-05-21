@@ -20,7 +20,7 @@ public class TraceableLetter : MonoBehaviour
         isTraced = false;
         spriteManager = FindObjectOfType<DrawableLetterSpriteManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        boxCollider = GetComponent<BoxCollider>();
+        //boxCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -35,12 +35,12 @@ public class TraceableLetter : MonoBehaviour
         if (isTraced)
         {
             spriteRenderer.sprite = spriteManager.GetTracedSpriteOfLetter(letter);
-            boxCollider.size = new Vector3(spriteManager.GetTracedSpriteOfLetter(letter).rect.width / 100, spriteManager.GetTracedSpriteOfLetter(letter).rect.height / 100, 0.2f);
+            //boxCollider.size = new Vector3(spriteManager.GetTracedSpriteOfLetter(letter).rect.width / 100, spriteManager.GetTracedSpriteOfLetter(letter).rect.height / 100, 0.2f);
         }
         else
         {
             spriteRenderer.sprite = spriteManager.GetUntracedSpriteOfLetter(letter);
-            boxCollider.size = new Vector3(spriteManager.GetUntracedSpriteOfLetter(letter).rect.width / 100, spriteManager.GetUntracedSpriteOfLetter(letter).rect.height / 100, 0.2f);
+            //boxCollider.size = new Vector3(spriteManager.GetUntracedSpriteOfLetter(letter).rect.width / 100, spriteManager.GetUntracedSpriteOfLetter(letter).rect.height / 100, 0.2f);
         }
     }
 
