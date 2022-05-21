@@ -5,7 +5,15 @@ using UnityEngine.XR.ARFoundation;
 
 public class ARCursor : MonoBehaviour
 {
+    public const int PHASE_HUNT_OBJECTS = 1;
+    public const int PHASE_FIND_SURFACE = 2;
+    public const int PHASE_TRACE_LETTERS = 3;
+
+    public LayerMask letterLayer;
+
     public GameObject cursorChildObject;
+
+    public GameObject pencilLead;
 
     public GameObject objectToPlace;
     public ARRaycastManager raycastManager;
@@ -23,9 +31,15 @@ public class ARCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameManager.currentPhase == 2)
+        if (gameManager.currentPhase == PHASE_FIND_SURFACE)
         {
+            useCursor = true;
             objectToPlace = gameManager.GetCurrentWord().wordPrefab;
+        }
+        else if (gameManager.currentPhase == PHASE_TRACE_LETTERS)
+        {
+            useCursor = false;
+            objectToPlace = pencilLead;
         }
 
         if (useCursor)
@@ -33,21 +47,23 @@ public class ARCursor : MonoBehaviour
             UpdateCursor();
         }
 
-        if (UserTappedScreen())
+        if (!(Input.touchCount > 0))
         {
-            if (useCursor)
-            {
-                GameObject.Instantiate(objectToPlace, transform.position, transform.rotation);
-            }else
-            {
-                List<ARRaycastHit> hits = new List<ARRaycastHit>();
-                raycastManager.Raycast(Input.GetTouch(0).position, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
-                if (hits.Count > 0)
-                {
-                    GameObject.Instantiate(objectToPlace, hits[0].pose.position, hits[0].pose.rotation);
-                }
-            }
+            // If player is not touching screen, don't go further
+            return;
         }
+
+        if (gameManager.currentPhase == PHASE_FIND_SURFACE)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                HandleObjectPlacement();
+            }
+        }else if(gameManager.currentPhase == PHASE_TRACE_LETTERS)
+        {
+            HandleLeadPlacement();
+        }
+
     }
 
     void UpdateCursor()
@@ -62,9 +78,22 @@ public class ARCursor : MonoBehaviour
             transform.rotation = hits[0].pose.rotation;
         }
     }
-
-    bool UserTappedScreen()
+    void HandleObjectPlacement()
     {
-        return Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began;
+        if (useCursor)
+        {
+            gameManager.currentPhase = PHASE_TRACE_LETTERS;
+            GameObject.Instantiate(objectToPlace, transform.position, transform.rotation);
+        }
+    }
+
+    void HandleLeadPlacement()
+    { 
+            List<ARRaycastHit> hits = new List<ARRaycastHit>();
+            raycastManager.Raycast(Input.GetTouch(0).position, hits);
+            if (hits.Count > 0)
+            {
+                GameObject.Instantiate(objectToPlace, hits[0].pose.position, hits[0].pose.rotation);
+            }
     }
 }
