@@ -14,6 +14,8 @@ public class TraceableLetter : MonoBehaviour
     DrawableLetterSpriteManager spriteManager;
     BoxCollider boxCollider;
 
+    public GameObject completionEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,10 @@ public class TraceableLetter : MonoBehaviour
     {
         if (AllPointsDrawnOver())
         {
+            if(isTraced == false)
+            {
+                //Instantiate(completionEffect, transform.position, Quaternion.identity);
+            }
             isTraced = true;
             DestroyAllChildren();
         }
