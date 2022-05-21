@@ -79,6 +79,13 @@ public class GameManager : MonoBehaviour
         planeManager.enabled = false;
         pointCloudManager.enabled = false;
         arCursor.SetActive(false);
+
+        ARPlane[] objects = GameObject.FindObjectsOfType<ARPlane>();
+
+        for (int i = 0; i < objects.Length; i++)
+        {
+            Destroy(objects[i].gameObject);
+        }
     }
     public void StartFindSurfacePhase()
     {
