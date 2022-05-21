@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PencilLead : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        transform.SetParent(collision.transform);
+        if (collision.CompareTag("Letter"))
+        {
+            transform.SetParent(collision.transform);
+        }
     }
 }

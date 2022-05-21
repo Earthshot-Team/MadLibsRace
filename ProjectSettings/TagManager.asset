@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PencilLead
+  - Letter
   layers:
   - Default
   - TransparentFX

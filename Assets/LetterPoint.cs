@@ -6,7 +6,7 @@ public class LetterPoint : MonoBehaviour
 {
     public bool drawnOver;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.CompareTag("PencilLead"))
         {
