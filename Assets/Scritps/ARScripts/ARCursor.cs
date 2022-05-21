@@ -34,11 +34,13 @@ public class ARCursor : MonoBehaviour
         if (gameManager.currentPhase == PHASE_FIND_SURFACE)
         {
             useCursor = true;
+            cursorChildObject.SetActive(true);
             objectToPlace = gameManager.GetCurrentWord().wordPrefab;
         }
         else if (gameManager.currentPhase == PHASE_TRACE_LETTERS)
         {
             useCursor = false;
+            cursorChildObject.SetActive(false);
             objectToPlace = pencilLead;
         }
 
@@ -93,7 +95,7 @@ public class ARCursor : MonoBehaviour
             raycastManager.Raycast(Input.GetTouch(0).position, hits);
             if (hits.Count > 0)
             {
-                GameObject.Instantiate(objectToPlace, hits[0].pose.position, hits[0].pose.rotation);
+                GameObject dot = GameObject.Instantiate(objectToPlace, hits[0].pose.position, hits[0].pose.rotation);
             }
     }
 }

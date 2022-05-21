@@ -29,6 +29,7 @@ public class TraceableLetter : MonoBehaviour
         if (AllPointsDrawnOver())
         {
             isTraced = true;
+            DestroyAllChildren();
         }
 
         if (isTraced)
