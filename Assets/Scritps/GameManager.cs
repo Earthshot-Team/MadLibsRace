@@ -105,8 +105,8 @@ public class GameManager : MonoBehaviour
         currentPhase = PHASE_STORYTIME;
 
         huntingPhaseCanvas.SetActive(false);
-        planeManager.enabled = false;
-        pointCloudManager.enabled = false;
+        planeManager.enabled = true;
+        pointCloudManager.enabled = true;
         arCursor.SetActive(false);
 
         Instantiate(storyObject, currentWordObject.position, currentWordObject.rotation);

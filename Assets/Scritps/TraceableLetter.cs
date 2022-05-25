@@ -43,12 +43,10 @@ public class TraceableLetter : MonoBehaviour
         if (isTraced)
         {
             spriteRenderer.sprite = spriteManager.GetTracedSpriteOfLetter(letter);
-            //boxCollider.size = new Vector3(spriteManager.GetTracedSpriteOfLetter(letter).rect.width / 100, spriteManager.GetTracedSpriteOfLetter(letter).rect.height / 100, 0.2f);
         }
         else
         {
             spriteRenderer.sprite = spriteManager.GetUntracedSpriteOfLetter(letter);
-            //boxCollider.size = new Vector3(spriteManager.GetUntracedSpriteOfLetter(letter).rect.width / 100, spriteManager.GetUntracedSpriteOfLetter(letter).rect.height / 100, 0.2f);
         }
     }
 
