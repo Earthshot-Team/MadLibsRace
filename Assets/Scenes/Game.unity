@@ -429,10 +429,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9388ae2f4f7cba74fa1db5ee0f5ea0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfWords: 4
+  numOfWords: 1
   words: []
   cameraButton: {fileID: 850619279}
   cameraButtonImage: {fileID: 973927607}
+  currentWordObject: {fileID: 0}
   currentPhase: 0
   huntingPhaseCanvas: {fileID: 1658254132}
   arSessionOrigin: {fileID: 82077071}

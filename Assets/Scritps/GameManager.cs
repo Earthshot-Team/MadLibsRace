@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     public Button cameraButton;
     public Image cameraButtonImage;
 
+    [HideInInspector]
+    public Transform currentWordObject;
+
     public const int PHASE_HUNT_OBJECTS = 1;
     public const int PHASE_FIND_SURFACE = 2;
     public const int PHASE_TRACE_LETTERS = 3;
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.LogError("Current Phase is: " + currentPhase);
         cameraButtonImage.sprite = GetCurrentWord().icon;
 
         if (AllWordsCollected())
@@ -105,7 +109,7 @@ public class GameManager : MonoBehaviour
         pointCloudManager.enabled = false;
         arCursor.SetActive(false);
 
-        Instantiate(storyObject, transform.position, transform.rotation);
+        Instantiate(storyObject, currentWordObject.position, currentWordObject.rotation);
     }
 
 

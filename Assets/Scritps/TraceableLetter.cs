@@ -13,6 +13,7 @@ public class TraceableLetter : MonoBehaviour
     SpriteRenderer spriteRenderer;
     DrawableLetterSpriteManager spriteManager;
     BoxCollider boxCollider;
+    Animator anim;
 
     public GameObject completionEffect;
 
@@ -22,6 +23,7 @@ public class TraceableLetter : MonoBehaviour
         isTraced = false;
         spriteManager = FindObjectOfType<DrawableLetterSpriteManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         //boxCollider = GetComponent<BoxCollider>();
     }
 
@@ -32,7 +34,7 @@ public class TraceableLetter : MonoBehaviour
         {
             if(isTraced == false)
             {
-                //Instantiate(completionEffect, transform.position, Quaternion.identity);
+                anim.SetTrigger("complete");
             }
             isTraced = true;
             DestroyAllChildren();

@@ -15,6 +15,8 @@ public class WordObject : MonoBehaviour
         target = FindObjectOfType<Camera>().transform;
         gameManager = FindObjectOfType<GameManager>();
 
+        gameManager.currentWordObject = this.transform;
+
         letters = GetComponentsInChildren<TraceableLetter>();
 
         transform.LookAt(target, Vector3.up);
