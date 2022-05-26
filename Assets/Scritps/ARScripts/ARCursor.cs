@@ -12,13 +12,13 @@ public class ARCursor : MonoBehaviour
     public LayerMask letterLayer;
 
     public GameObject cursorChildObject;
-
     public GameObject pencilLead;
-
     public GameObject objectToPlace;
+
     public ARRaycastManager raycastManager;
 
     public bool useCursor;
+
     GameManager gameManager;
 
     // Start is called before the first frame update
